@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جدول امتحانات الميدتيرم - كلية العلوم - جامعة طنطا</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --navy-light: #1a3a5c;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e6b8;
+    --cream: #faf8f3;
+    --white: #ffffff;
+    --text-main: #1a1a2e;
+    --text-muted: #6b7280;
+    --border: rgba(201,168,76,0.25);
+    --shadow: 0 8px 32px rgba(10,22,40,0.18);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 90%, rgba(17,34,64,0.9) 0%, transparent 70%),
+      linear-gradient(160deg, #0a1628 0%, #112240 50%, #0d1f3c 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* geometric decoration */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -100px; left: -100px;
+    width: 500px; height: 500px;
+    border: 1px solid rgba(201,168,76,0.06);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    text-align: center;
+    padding: 50px 20px 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .badge {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+    flex-shrink: 0;
+  }
+
+  .header-titles h1 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.25;
+  }
+
+  .header-titles p {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    margin-top: 4px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+    border-radius: 2px;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── SELECTORS ─── */
+  .selector-panel {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+
+  .selector-panel h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .selector-panel h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Step layout */
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media(max-width: 600px) { .steps { grid-template-columns: 1fr; } }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .step-num {
+    width: 22px; height: 22px;
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 14px center;
+    padding-left: 36px;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    background-color: rgba(255,255,255,0.1);
+  }
+
+  select option {
+    background: var(--navy-mid);
+    color: var(--white);
+  }
+
+  select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ─── RESULTS ─── */
+  #results {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+  }
+
+  #results.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .result-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .result-meta {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.05);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  /* ─── TABLE ─── */
+  .table-wrap {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead tr {
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+    border-bottom: 1px solid var(--border);
+  }
+
+  thead th {
+    padding: 16px 18px;
+    text-align: right;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody tr:hover {
+    background: rgba(201,168,76,0.07);
+  }
+
+  tbody td {
+    padding: 15px 18px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+
+  .td-date {
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .day-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-bottom: 3px;
+    font-weight: 700;
+  }
+
+  .day-tue  { background: rgba(99,102,241,0.2);  color: #a5b4fc; }
+  .day-wed  { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+  .day-thu  { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .day-sat  { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+  .day-sun  { background: rgba(14,165,233,0.15); color: #7dd3fc; }
+  .day-mon  { background: rgba(168,85,247,0.15); color: #d8b4fe; }
+
+  .td-code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .td-place {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .online-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(16,185,129,0.15);
+    color: #6ee7b7;
+    border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  /* ─── EMPTY / PLACEHOLDER ─── */
+  .placeholder {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .placeholder-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .placeholder p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.95rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
+    color: rgba(255,255,255,0.25);
+    font-size: 0.78rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 20px;
+  }
+
+  .row-num {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+    width: 32px;
+    text-align: center;
+  }
+
+  /* scroll */
+  @media(max-width: 700px) {
+    .table-wrap { overflow-x: auto; }
+    table { min-width: 560px; }
+  }
+
+  /* ─── TAB SWITCHER ─── */
+  .tab-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .tab-btn:hover {
+    background: rgba(201,168,76,0.08);
+    color: var(--gold-light);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, rgba(201,168,76,0.22), rgba(201,168,76,0.08));
+    color: var(--gold-light);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
+  }
+
+  /* ─── SEARCH PANEL ─── */
+  .search-panel {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+    display: none;
+  }
+
+  .search-panel.active { display: block; }
+  .selector-panel.hidden { display: none; }
+
+  .search-panel h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .search-panel h2::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .search-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .search-input-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
+  #globalSearch {
+    width: 100%;
+    padding: 14px 42px 14px 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    direction: rtl;
+  }
+
+  #globalSearch::placeholder { color: rgba(255,255,255,0.3); }
+
+  #globalSearch:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    background: rgba(255,255,255,0.09);
+  }
+
+  /* filter chips */
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .chip:hover { background: rgba(201,168,76,0.08); color: var(--gold-light); }
+  .chip.active {
+    background: rgba(201,168,76,0.18);
+    color: var(--gold-light);
+    border-color: var(--gold);
+  }
+
+  /* search results */
+  #searchResults {
+    margin-top: 28px;
+    display: none;
+  }
+
+  #searchResults.show { display: block; }
+
+  .search-count {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .search-count strong {
+    color: var(--gold-light);
+  }
+
+  /* search result cards */
+  .result-cards {
+    display: grid;
+    gap: 12px;
+  }
+
+  .result-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 12px 18px;
+    align-items: center;
+    transition: all 0.2s ease;
+    animation: fadeSlide 0.3s ease both;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity:0; transform: translateY(8px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .result-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.05);
+    transform: translateY(-1px);
+  }
+
+  .card-date {
+    text-align: center;
+    min-width: 70px;
+  }
+
+  .card-day-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+
+  .card-date-num {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .card-body {}
+
+  .card-course {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .card-code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-weight: 700;
+    background: rgba(201,168,76,0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .card-section {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .card-place {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .card-right {
+    text-align: left;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    min-width: 80px;
+  }
+
+  mark {
+    background: rgba(201,168,76,0.35);
+    color: var(--gold-light);
+    border-radius: 3px;
+    padding: 0 2px;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.9rem;
+  }
+
+  .no-results span { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-row">
+    <div class="badge">🎓</div>
+    <div class="header-titles">
+      <h1>جدول امتحانات الميدتيرم</h1>
+      <p>كلية العلوم — جامعة طنطا — الفصل الدراسي الثاني 2026</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p class="subtitle">اختر مستواك الدراسي والشعبة لعرض جدول الامتحانات الخاص بك</p>
+</header>
+
+<div class="container">
+
+  <!-- TAB SWITCHER -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('browse')" id="tab-browse">📋 تصفح الجدول</button>
+    <button class="tab-btn" onclick="switchTab('search')" id="tab-search">🔎 بحث شامل</button>
+  </div>
+
+  <!-- SEARCH PANEL -->
+  <div class="search-panel" id="searchPanel">
+    <h2>🔎 البحث في كل الجداول</h2>
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="globalSearch" placeholder="ابحث باسم المقرر، الكود، أو التاريخ (مثال: كيمياء أو Chm102 أو 2026-4-15 أو الثلاثاء)..." oninput="doSearch()" autocomplete="off">
+      </div>
+    </div>
+    <div class="filter-chips">
+      <span class="chip active" data-filter="all" onclick="setFilter(this,'all')">الكل</span>
+      <span class="chip" data-filter="course" onclick="setFilter(this,'course')">📚 اسم المقرر</span>
+      <span class="chip" data-filter="code" onclick="setFilter(this,'code')">🏷️ كود المقرر</span>
+      <span class="chip" data-filter="date" onclick="setFilter(this,'date')">📅 التاريخ / اليوم</span>
+      <span class="chip" data-filter="place" onclick="setFilter(this,'place')">📍 المكان</span>
+    </div>
+    <div id="searchResults">
+      <div class="search-count" id="searchCount"></div>
+      <div class="result-cards" id="resultCards"></div>
+    </div>
+  </div>
+
+  <div class="selector-panel" id="selectorPanel">
+    <h2>🔍 ابحث عن جدولك</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-label"><span class="step-num">١</span> اختر المستوى الدراسي</div>
+        <select id="levelSelect" onchange="onLevelChange()">
+          <option value="">— اختر المستوى —</option>
+        </select>
+      </div>
+      <div class="step">
+        <div class="step-label"><span class="step-num">٢</span> اختر الشعبة / البرنامج</div>
+        <select id="sectionSelect" onchange="onSectionChange()" disabled>
+          <option value="">— اختر أولاً المستوى —</option>
+        </select>
+      </div>
+    </div>
+  </div><!-- /selector-panel -->
+
+  <div id="results">
+    <div class="result-header">
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-meta" id="resultMeta"></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="row-num">#</th>
+            <th>اليوم والتاريخ</th>
+            <th>اسم المقرر</th>
+            <th>كود المقرر</th>
+            <th>المكان</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="placeholder" class="placeholder">
+    <div class="placeholder-icon">📅</div>
+    <p>اختر مستواك الدراسي والشعبة لعرض الجدول</p>
+  </div>
+
+</div>
+
+<footer>
+  لجنة جداول المراقبات — كلية العلوم — جامعة طنطا &nbsp;|&nbsp; الفصل الدراسي الثاني 2026
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA — full exam schedule extracted from PDF
+// ═══════════════════════════════════════════════════════════════
+const scheduleData = {
+
+  // ── LEVEL 1 ──────────────────────────────────────────────────
+  "المستوى الأول": {
+    time: "من 10:30 إلى 11:30",
+    sections: {
+      "علوم طبيعية": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء عامة 2",     code:"Chm102", place:"مجمع 1 و2 و4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"تفاضل وتكامل 2",     code:"Mat104", place:"مجمع 1 و2 و4" },
+        { day:"الخميس",  date:"2026-4-16", course:"مبادئ علم الحيوان",   code:"Zoo104", place:"مجمع 1 و2 و4" },
+        { day:"السبت",   date:"2026-4-18", course:"كهرباء وبصريات",      code:"Phy102", place:"مجمع 1 و2 و4" },
+        { day:"الأحد",   date:"2026-4-19", course:"جبر وهندسة",          code:"Mat102", place:"مجمع 1 و2 و4" },
+        { day:"الاثنين", date:"2026-4-20", course:"مقدمة في الحاسب",     code:"Com102", place:"مجمع 1 و2 و4" },
+        { day:"",        date:"",          course:"ثقافة الجودة",          code:"Uni104", place:"أونلاين" },
+        { day:"",        date:"",          course:"مهارات متنقلة",         code:"Uni110", place:"أونلاين" },
+        { day:"",        date:"",          course:"تكنولوجيا المعلومات",   code:"Uni102", place:"أونلاين" },
+      ],
+      "علوم بيولوجية": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء عامة 2",   code:"Chm102", place:"مجمع 5 و6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"علم النبات 2",      code:"Bot102", place:"مجمع 5 و6" },
+        { day:"الخميس",  date:"2026-4-16", course:"تنوع حيواني",       code:"Zoo102", place:"مجمع 5 و6" },
+        { day:"السبت",   date:"2026-4-18", course:"فيزياء عامة 2",     code:"Phy104", place:"مجمع 5 و6" },
+        { day:"الأحد",   date:"2026-4-19", course:"مهارات الحاسب",     code:"Com102", place:"مجمع 5 و6" },
+        { day:"",        date:"",          course:"ثقافة الجودة",        code:"Uni104", place:"أونلاين" },
+        { day:"",        date:"",          course:"مهارات متنقلة",       code:"Uni110", place:"أونلاين" },
+        { day:"",        date:"",          course:"تكنولوجيا المعلومات", code:"Uni102", place:"أونلاين" },
+      ],
+      "علوم جيولوجية": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء عامة 2",                  code:"Chm102", place:"مدرج 9" },
+        { day:"الأربعاء",date:"2026-4-15", course:"ثقافة الجودة",                     code:"Uni104", place:"مدرج 9" },
+        { day:"الخميس",  date:"2026-4-16", course:"مبادئ علم الحيوان",               code:"Zoo104", place:"مدرج 9" },
+        { day:"السبت",   date:"2026-4-18", course:"بلورات ومعادن وصخور",             code:"Geo102", place:"مدرج 9" },
+        { day:"الأحد",   date:"2026-4-19", course:"مهارات الحاسب",                   code:"Com104", place:"مدرج 9" },
+        { day:"الاثنين", date:"2026-4-20", course:"كهرباء وبصريات هندسية",           code:"Phy102", place:"مدرج 9" },
+        { day:"",        date:"",          course:"مهارات متنقلة",                    code:"Uni110", place:"أونلاين" },
+        { day:"",        date:"",          course:"تكنولوجيا المعلومات",              code:"Uni102", place:"أونلاين" },
+      ],
+    }
+  },
+
+  // ── LEVEL 2 ──────────────────────────────────────────────────
+  "المستوى الثاني": {
+    time: "من 12:00 إلى 1:00",
+    sections: {
+      "رياضيات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تراكيب البيانات والخوارزميات",       code:"Com224", place:"مجمع 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"المعادلات التفاضلية العادية",         code:"Mat202", place:"معمل ح1" },
+        { day:"الخميس",  date:"2026-4-16", course:"تحليل المتجهات وهندسة المجسمات",     code:"Mat204", place:"معمل ح1" },
+        { day:"السبت",   date:"2026-4-18", course:"الجبر الخطي",                         code:"Mat206", place:"معمل ح1" },
+        { day:"الأحد",   date:"2026-4-19", course:"الديناميكا",                          code:"Mat208", place:"معمل ح1" },
+        { day:"الاثنين", date:"2026-4-20", course:"تحليل رياضي",                        code:"Mat210", place:"معمل ح1" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"مقدمة في بصريات فيزيائية",           code:"Phy220", place:"معمل ح1" },
+      ],
+      "إحصاء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تراكيب البيانات والخوارزميات",  code:"Com216", place:"مجمع 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"المعادلات التفاضلية العادية",    code:"Mat202", place:"قاعة 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"تحليل رياضي",                   code:"Mat220", place:"قاعة 1" },
+        { day:"السبت",   date:"2026-4-18", course:"استدلال إحصائي",                code:"Sta202", place:"قاعة 1" },
+        { day:"الأحد",   date:"2026-4-19", course:"نظرية التوزيعات",               code:"Sta204", place:"قاعة 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"نظرية الأعداد",                 code:"Mat212", place:"قاعة 1" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"مبادئ المعلوماتية الحيوية",     code:"Phy228", place:"قاعة 1" },
+      ],
+      "علوم الحاسب": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تراكيب البيانات والخوارزميات",code:"Com202", place:"مجمع 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"نظم قواعد البيانات",           code:"Com204", place:"مجمع 4" },
+        { day:"الخميس",  date:"2026-4-16", course:"اتصال البيانات",               code:"Com208", place:"مجمع 4" },
+        { day:"السبت",   date:"2026-4-18", course:"نظم المعلومات",               code:"Com210", place:"مجمع 4" },
+        { day:"الأحد",   date:"2026-4-19", course:"المنطق الرياضي والجبر البولي", code:"Mat224", place:"مجمع 4" },
+        { day:"الاثنين", date:"2026-4-20", course:"نظرية الاحتمالات",            code:"Sta212", place:"مجمع 4" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"مدخل إلى القياسات الحيوية",   code:"BPh222", place:"مجمع 4" },
+      ],
+      "نبات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم الفطريات وأمراض",         code:"Mic252", place:"مجمع 6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"أساسيات التحليل الآلي",        code:"Chm274", place:"مدرج 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"علاقات مائية وتغذية معدنية",   code:"Bot204", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"بناء ضوئي وطاقة حيوية",       code:"Bot202", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"أيض ثانوي",                    code:"Bot206", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"مكافحة حيوية",                code:"Mic256", place:"معامل القسم" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",      code:"Sta214", place:"أونلاين" },
+      ],
+      "علم الحيوان": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم السموم وعلم الأمراض",     code:"Zoo214", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"مقدمة في التحليل الآلي",       code:"Chm234", place:"مدرج 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"بيولوجيا اللافقاريات",         code:"Zoo202", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"علم الأنسجة الوظيفية",         code:"Zoo208", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم مناعة",                    code:"Zoo204", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"الأوليات الحيوانية",           code:"Zoo206", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"منتجات حيوانية وصحة الإنسان", code:"Zoo212", place:"معامل القسم" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",      code:"Sta214", place:"أونلاين" },
+      ],
+      "علم الحشرات": [
+        { day:"الأربعاء",date:"2026-4-15", course:"مقدمة في التحليل الآلي",   code:"Chm234", place:"مدرج 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"العلاقات الحشرية",         code:"Ent206", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"آفات ما بعد الحصاد الحشرية",code:"Ent208",place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"تصنيف الحشرات والتطور",    code:"Ent202", place:"مدرج 5" },
+        { day:"الاثنين", date:"2026-4-20", course:"بيئة الحشرات",             code:"Ent204", place:"مدرج 5" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"بيولوجيا الخلية",          code:"Ent212", place:"مدرج 5" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",  code:"Sta214", place:"أونلاين" },
+      ],
+      "ميكروبيولوجي": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم الفطريات",                         code:"Mic202", place:"مجمع 6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"أساسيات التحليل الآلي",                 code:"Chm274", place:"مدرج 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"الكائنات الدقيقة للبيئات المتطرفة",    code:"Mic208", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"سموم ميكروبية",                        code:"Mic212", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"إنزيمات",                              code:"Mic204", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"علم المناعة",                          code:"Mic206", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"بيئة نباتية وقضايا بيئية",            code:"Bot252", place:"معامل القسم" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",              code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء": [
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",         code:"Chm214", place:"مجمع 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"تحليل آلي",                            code:"Chm208", place:"مجمع 6" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                         code:"Chm220", place:"مجمع 6" },
+        { day:"الأحد",   date:"2026-4-19", course:"كيمياء العناصر الانتقالية",            code:"Chm210", place:"مجمع 6" },
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء الحالة الصلبة والكيمياء النووية",code:"Chm212",place:"مجمع 6" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"ميكانيكية التفاعلات العضوية",          code:"Chm216", place:"مجمع 6" },
+        { day:"الأربعاء",date:"2026-4-22", course:"كيمياء السطوح والحفز",                 code:"Chm206", place:"مجمع 6" },
+      ],
+      "كيمياء حيوية": [
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء الكربوهيدرات والدهون",        code:"BCh202", place:"مدرج 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء البروتين والأحماض الأمينية",  code:"BCh204", place:"مدرج 1" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                       code:"Chm220", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"مقدمة في الكيمياء الكهربية",         code:"Chm254", place:"مدرج 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"تحليل آلي",                          code:"Chm256", place:"مدرج 1" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"كيمياء العناصر الانتقالية والتناسقية",code:"Chm258",place:"مدرج 1"},
+        { day:"الأربعاء",date:"2026-4-22", course:"كيمياء فراغية",                     code:"Chm260", place:"مدرج 1" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",            code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء-كيمياء حيوية": [
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",       code:"Chm214", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء العناصر الرئيسية",            code:"Chm222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                       code:"Chm220", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"كيمياء وأيض البروتينات والأحماض النووية",code:"BCh224",place:"مدرج 4"},
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء وأيض الكربوهيدرات والدهون",  code:"BCh222", place:"مدرج 4" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"ميكروبيولوجيا عامة",                code:"Mic250", place:"مدرج 4" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",            code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء نبات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"فطريات وأمراض نبات",              code:"Mic272", place:"مجمع 6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",    code:"Chm214", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء العناصر الرئيسية",          code:"Chm222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                     code:"Chm220", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم الوراثة والخلية",              code:"Bot242", place:"مدرج 6" },
+        { day:"الاثنين", date:"2026-4-20", course:"تصنيف النباتات الزهرية",           code:"Bot246", place:"مدرج 6" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",          code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء علم الحيوان": [
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",  code:"Chm214", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء العناصر الرئيسية",        code:"Chm222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                   code:"Chm220", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"بيولوجيا اللافقاريات",           code:"Zoo222", place:"مدرج 8" },
+        { day:"الاثنين", date:"2026-4-20", course:"علم مناعة",                      code:"Zoo224", place:"مدرج 8" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"منتجات حيوانية وصحة الإنسان",   code:"Zoo226", place:"مدرج 8" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",        code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء علم الحشرات": [
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",  code:"Chm214", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء العناصر الرئيسية",        code:"Chm222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                   code:"Chm220", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"تصنيف الحشرات والتطور",          code:"Ent202", place:"مدرج 5" },
+        { day:"الاثنين", date:"2026-4-20", course:"بيئة الحشرات",                  code:"Ent204", place:"مدرج 5" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"بيولوجيا الخلية",               code:"Ent212", place:"مدرج 5" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",        code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء ميكروبيولوجي": [
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",     code:"Chm214", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء العناصر الرئيسية",           code:"Chm222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                      code:"Chm220", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم الوراثة",                      code:"Bot272", place:"مدرج 3" },
+        { day:"الاثنين", date:"2026-4-20", course:"هرمونات نباتية وفسيولوجيا الإجهاد",code:"Bot274", place:"مدرج 3" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فطريات وأمراض نبات",              code:"Mic242", place:"مدرج 3" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي",          code:"Sta214", place:"أونلاين" },
+      ],
+      "كيمياء جيولوجيا": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"المعادن المكونة للصخور",         code:"Geo202", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء فراغية ومركبات مزدوجة",   code:"Chm214", place:"مجمع 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء العناصر الرئيسية",         code:"Chm222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء حركية",                    code:"Chm220", place:"مجمع 6" },
+        { day:"الأحد",   date:"2026-4-19", course:"صخور رسوبية وترسيب",             code:"Geo214", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"علم المعادن التطبيقية",           code:"Geo218", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"علم البيئة العام",               code:"Bot256", place:"معامل القسم" },
+      ],
+      "جيولوجيا": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"الجهد الاستكشافي والتفسير",  code:"GPh212", place:"مدرج 5" },
+        { day:"الأربعاء",date:"2026-4-15", course:"نظم المعلومات الجغرافية",     code:"Geo212", place:"مدرج 7" },
+        { day:"الخميس",  date:"2026-4-16", course:"حفريات كبيرة",                code:"Geo208", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"المعادن المكونة للصخور",      code:"Geo202", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم الحفريات الدقيقة",       code:"Geo204", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"علم الصخور الرسوبية",        code:"Geo206", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"معادن تطبيقية",              code:"Geo210", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-22", course:"الجهد الاستكشافي والتفسير",  code:"GPh212", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-23", course:"مقدمة في علم التربة",        code:"Bot250", place:"معامل القسم" },
+      ],
+      "جيوفيزياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"إحصاء",                      code:"Sta206", place:"مدرج 7" },
+        { day:"الأربعاء",date:"2026-4-15", course:"نظم المعلومات الجغرافية",     code:"Geo212", place:"مدرج 7" },
+        { day:"الخميس",  date:"2026-4-16", course:"الطرق السيزمية",             code:"GPh202", place:"مدرج 7" },
+        { day:"السبت",   date:"2026-4-18", course:"طرق حرارية أرضية وإشعاعية", code:"GPh204", place:"مدرج 7" },
+        { day:"الأحد",   date:"2026-4-19", course:"المغناطيسية القديمة",        code:"GPh206", place:"مدرج 7" },
+        { day:"الاثنين", date:"2026-4-20", course:"كهرومغناطيسية",              code:"GPh208", place:"مدرج 7" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"الحفريات الدقيقة",          code:"GPh210", place:"مدرج 7" },
+        { day:"الأربعاء",date:"2026-4-22", course:"المعادن المكونة للصخور",    code:"Geo202", place:"مدرج 7" },
+      ],
+      "فيزياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"مقدمة في الفيزياء الحيوية", code:"BPh216", place:"مدرج 9" },
+        { day:"الأربعاء",date:"2026-4-15", course:"تيار متردد وإلكترونيات",     code:"Phy208", place:"مدرج 9" },
+        { day:"الخميس",  date:"2026-4-16", course:"فيزياء رياضية",             code:"Phy212", place:"مدرج 9" },
+        { day:"السبت",   date:"2026-4-18", course:"علم الفلك",                 code:"Phy214", place:"مدرج 9" },
+        { day:"الأحد",   date:"2026-4-19", course:"كهرومغناطيسية",            code:"Phy206", place:"مجمع 5" },
+        { day:"الاثنين", date:"2026-4-20", course:"ديناميكا حرارية",          code:"Phy204", place:"مجمع 5" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء حديثة",            code:"Phy210", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-22", course:"كيمياء صناعية",           code:"Chm228", place:"مجمع 5" },
+      ],
+      "فيزياء حيوية": [
+        { day:"الأربعاء",date:"2026-4-15", course:"تيار متردد وإلكترونيات",    code:"Phy208", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"فلك وأحياء فلكية",         code:"BPh208", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"فيزياء رياضية حيوية",      code:"BPh210", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"فيزياء حيوية",            code:"BPh204", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء حديثة",           code:"Phy210", place:"مجمع 5" },
+        { day:"",        date:"",          course:"مقدمة في الإحصاء الحيوي", code:"Sta214", place:"أونلاين" },
+      ],
+      "علوم المواد": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"مقدمة في الفيزياء الحيوية",code:"BPh216", place:"مدرج 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"تيار متردد وإلكترونيات",   code:"Phy208", place:"مدرج 4" },
+        { day:"الخميس",  date:"2026-4-16", course:"فيزياء رياضية",           code:"Phy212", place:"مدرج 4" },
+        { day:"الأحد",   date:"2026-4-19", course:"كهرومغناطيسية",          code:"Phy206", place:"مجمع 5" },
+        { day:"الاثنين", date:"2026-4-20", course:"ديناميكا حرارية",        code:"Phy204", place:"مجمع 5" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء حديثة",          code:"Phy210", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-22", course:"كيمياء صناعية",         code:"Chm228", place:"مجمع 5" },
+      ],
+    }
+  },
+
+  // ── LEVEL 3 ──────────────────────────────────────────────────
+  "المستوى الثالث": {
+    time: "من 1:30 إلى 2:30",
+    sections: {
+      "رياضيات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"الديناميكا التحليلية",         code:"Mat302", place:"قاعة 2" },
+        { day:"الأربعاء",date:"2026-4-15", course:"توبولوجي",                      code:"Mat304", place:"قاعة 2" },
+        { day:"الخميس",  date:"2026-4-16", course:"ميكانيكا الكم",                code:"Mat306", place:"قاعة 2" },
+        { day:"السبت",   date:"2026-4-18", course:"بحوث عمليات",                  code:"Mat308", place:"قاعة 2" },
+        { day:"الأحد",   date:"2026-4-19", course:"تحليل مركب",                   code:"Mat310", place:"قاعة 2" },
+        { day:"الاثنين", date:"2026-4-20", course:"كهرباء ساكنة ومغناطيسية",      code:"Mat312", place:"قاعة 2" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"التحكم الأمثل",               code:"Mat314", place:"قاعة 2" },
+        { day:"الأربعاء",date:"2026-4-22", course:"نظرية الفوضى",                code:"Mat322", place:"قاعة 2" },
+      ],
+      "إحصاء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تحليل متعدد المتغيرات",        code:"Sta304", place:"قاعة 1" },
+        { day:"الأربعاء",date:"2026-4-15", course:"العمليات العشوائية",            code:"Sta306", place:"قاعة 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"الحزم الإحصائية",              code:"Sta308", place:"معمل 1" },
+        { day:"السبت",   date:"2026-4-18", course:"بحوث عمليات",                  code:"Mat308", place:"قاعة 1" },
+        { day:"الأحد",   date:"2026-4-19", course:"مراقبة الجودة الإحصائية",      code:"Sta310", place:"قاعة 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"تحليل الانحدار",               code:"Sta314", place:"قاعة 1" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"موضوعات مختارة في الإحصاء",   code:"Sta312", place:"قاعة 1" },
+      ],
+      "علوم الحاسب": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"نظم التشغيل",      code:"Com302", place:"مجمع 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"شبكات الحاسب",      code:"Com304", place:"مجمع 4" },
+        { day:"الخميس",  date:"2026-4-16", course:"تعلم الآلة",        code:"Com306", place:"مجمع 4" },
+        { day:"السبت",   date:"2026-4-18", course:"نظرية الأتمتة",     code:"Com308", place:"مجمع 4" },
+        { day:"الأحد",   date:"2026-4-19", course:"قواعد بيانات متقدمة",code:"Com312",place:"مجمع 4" },
+        { day:"الاثنين", date:"2026-4-20", course:"برمجة الويب",       code:"Com310", place:"مجمع 4" },
+      ],
+      "نبات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء حيوية",                       code:"BCh336", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-15", course:"نباتات مصر وبيئة الأراضي الرطبة والصحراوية",code:"Bot302",place:"مدرج 9"},
+        { day:"الخميس",  date:"2026-4-16", course:"تصنيف نبات",                          code:"Bot304", place:"مدرج 9" },
+        { day:"السبت",   date:"2026-4-18", course:"فسيولوجي طحالب",                      code:"Bot306", place:"مدرج 9" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم الجينوم والبروتيوم النباتي",      code:"Bot312", place:"مدرج 9" },
+        { day:"الاثنين", date:"2026-4-20", course:"المعالجة الحيوية النباتية",           code:"Bot314", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"التعبير الجيني والتنظيم",            code:"Bot316", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-22", course:"فسيولوجيا الميكروبات",              code:"Mic352", place:"معامل القسم" },
+      ],
+      "علم الحيوان": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء حيوية",                          code:"BCh336", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-15", course:"فسيولوجي 1",                             code:"Zoo302", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"علم البيئة الوظيفي",                    code:"Zoo304", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"علم الوبائيات ومناعة الطفيليات والتحكم",code:"Zoo306", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"تشريح مقارن للفقاريات",                code:"Zoo308", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"التقنيات المعملية",                    code:"Zoo312", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"دراسات حقلية",                        code:"Zoo316", place:"معامل القسم" },
+      ],
+      "علم الحشرات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء حيوية",                         code:"BCh336", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-15", course:"ممرضات الحشرات والمكافحة الحيوية",      code:"Ent302", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"المكافحة الحيوية للحشائش باستخدام الحشرات",code:"Ent308",place:"معامل القسم"},
+        { day:"السبت",   date:"2026-4-18", course:"علم الحشرات البيطري",                  code:"Ent312", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم الحشرات الطبية",                  code:"Ent304", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"علم الحشرات في الطب الشرعي",          code:"Ent306", place:"معامل القسم" },
+      ],
+      "ميكروبيولوجي": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء حيوية",                         code:"BCh336", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-15", course:"بناء ضوئي وفسيولوجيا الإجهاد",         code:"Bot372", place:"مدرج 3" },
+        { day:"الخميس",  date:"2026-4-16", course:"الكائنات الدقيقة في الإنسان وأركي",    code:"Mic312", place:"مدرج 3" },
+        { day:"السبت",   date:"2026-4-18", course:"العوامل المضادة للميكروبات",           code:"Mic306", place:"مدرج 3" },
+        { day:"الأحد",   date:"2026-4-19", course:"فسيولوجيا الكائنات الدقيقة",         code:"Mic302", place:"مدرج 3" },
+        { day:"الاثنين", date:"2026-4-20", course:"الميكروبيولوجيا الطبية والغذائية",   code:"Mic304", place:"مدرج 3" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"مفاعلات حيوية",                     code:"Mic314", place:"مدرج 3" },
+      ],
+      "كيمياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء حيوية",                         code:"BCh312", place:"مجمع 6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"أطياف جزيئية",                         code:"Chm302", place:"مجمع 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء الضوئية والليزر",               code:"Chm304", place:"مجمع 6" },
+        { day:"السبت",   date:"2026-4-18", course:"أطياف عضوية",                          code:"Chm306", place:"مجمع 6" },
+        { day:"الأحد",   date:"2026-4-19", course:"نواتج طبيعية",                        code:"Chm308", place:"مجمع 6" },
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء الحاسوب وكيمياء الحفز",       code:"Chm314", place:"مجمع 6" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"ميكانيكية التفاعلات غير العضوية",   code:"Chm316", place:"مجمع 6" },
+        { day:"الأربعاء",date:"2026-4-22", course:"كيمياء المواد ومعالجة المياه",      code:"Chm332", place:"مجمع 6" },
+      ],
+      "كيمياء حيوية": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"بيولوجيا الأغشية والفصل البيولوجي",code:"BCh312", place:"مدرج 6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"علم الإنزيمات",                      code:"BCh302", place:"مدرج 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"وظائف حيوية وسوائل بيولوجية",      code:"BCh304", place:"مدرج 6" },
+        { day:"السبت",   date:"2026-4-18", course:"هرمونات",                           code:"BCh306", place:"مدرج 6" },
+        { day:"الأحد",   date:"2026-4-19", course:"بيولوجيا جزيئية",                 code:"BCh308", place:"مدرج 6" },
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء حيوية عملية",              code:"BCh310", place:"مدرج 6" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"أيض العقاقير والسموم",            code:"BCh314", place:"مدرج 6" },
+        { day:"الأربعاء",date:"2026-4-22", course:"نواتج طبيعية",                   code:"Chm350", place:"مدرج 6" },
+      ],
+      "فيزياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"فيزياء طبية",        code:"BPh310", place:"مدرج 1" },
+        { day:"الأربعاء",date:"2026-4-15", course:"فيزياء الليزر",       code:"Phy306", place:"مدرج 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"علم البلورات",        code:"Phy304", place:"مدرج 1" },
+        { day:"السبت",   date:"2026-4-18", course:"فيزياء المفاعلات",   code:"Phy314", place:"مدرج 1" },
+        { day:"الأحد",   date:"2026-4-19", course:"الكترودينا ميكا",    code:"Phy308", place:"مدرج 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"فيزياء إشعاعية",    code:"Phy320", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء نووية",      code:"Phy310", place:"مدرج 1" },
+      ],
+      "فيزياء حيوية": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كهرومغناطيسية",           code:"BPh310", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"فيزياء الليزر",            code:"Phy306", place:"مدرج 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"أجهزة حيوية طبية",        code:"BPh304", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"فيزياء حيوية إشعاعية",   code:"BPh306", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"فيزياء نووية وطبية",     code:"BPh308", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"ميكانيكا السوائل الحيوية",code:"BPh312",place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء بيئية",           code:"Phy324", place:"معامل القسم" },
+      ],
+      "علوم المواد": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"فيزياء طبية",       code:"BPh310", place:"مدرج 1" },
+        { day:"الأربعاء",date:"2026-4-15", course:"فيزياء الليزر",      code:"Phy306", place:"مدرج 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"علم البلورات",       code:"Phy304", place:"مدرج 1" },
+        { day:"السبت",   date:"2026-4-18", course:"فيزياء المفاعلات",  code:"Phy314", place:"مدرج 1" },
+        { day:"الأحد",   date:"2026-4-19", course:"الكترود يناميكا",   code:"Phy308", place:"مدرج 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"أساسيات الطاقة الشمسية",code:"MSc304",place:"معامل القسم"},
+        { day:"الثلاثاء",date:"2026-4-21", course:"مبادئ الفيزياء النووية",code:"MSc306",place:"معامل القسم"},
+      ],
+      "جيولوجيا": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"جيولوجيا الخامات",            code:"Geo310", place:"مدرج 7" },
+        { day:"الأربعاء",date:"2026-4-15", course:"جيوكيمياء",                   code:"Geo304", place:"مدرج 8" },
+        { day:"الخميس",  date:"2026-4-16", course:"جيولوجيا مائية",              code:"Geo308", place:"مدرج 8" },
+        { day:"السبت",   date:"2026-4-18", course:"جيولوجيا تكتونية",           code:"Geo302", place:"مدرج 8" },
+        { day:"الأحد",   date:"2026-4-19", course:"الجيولوجيا تحت السطحية",    code:"Geo306", place:"مدرج 7" },
+        { day:"الاثنين", date:"2026-4-20", course:"جيولوجيا هندسية",           code:"Geo312", place:"مدرج 8" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"تسجيلات الآبار",            code:"Geo314", place:"مدرج 8" },
+        { day:"الأربعاء",date:"2026-4-22", course:"جيولوجيا الحقب الرابع",    code:"Geo316", place:"مدرج 8" },
+      ],
+      "جيوفيزياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"جيولوجيا الخامات",            code:"Geo310", place:"مدرج 7" },
+        { day:"الأربعاء",date:"2026-4-15", course:"التتابع الطبقي",              code:"GPh302", place:"مدرج 7" },
+        { day:"الخميس",  date:"2026-4-16", course:"فيزياء الصخور",              code:"GPh304", place:"مدرج 7" },
+        { day:"السبت",   date:"2026-4-18", course:"تكتونية الأرض",             code:"GPh306", place:"مدرج 7" },
+        { day:"الأحد",   date:"2026-4-19", course:"الجيولوجيا تحت السطحية",   code:"Geo306", place:"مدرج 7" },
+        { day:"الاثنين", date:"2026-4-20", course:"مبادئ الجيولوجيا المائية", code:"GPh308", place:"مدرج 7" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"جيوفيزياء بيئية",         code:"GPh310", place:"مدرج 7" },
+        { day:"الأربعاء",date:"2026-4-22", course:"المسح الجيوفيزيائي",      code:"GPh312", place:"مدرج 7" },
+      ],
+    }
+  },
+
+  // ── LEVEL 4 ──────────────────────────────────────────────────
+  "المستوى الرابع": {
+    time: "من 09:00 إلى 10:00",
+    sections: {
+      "رياضيات": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"معادلات تفاضلية جزئية",  code:"MA4206", place:"قاعة 2" },
+        { day:"الأربعاء",date:"2026-4-15", course:"جبر 2",                   code:"MA4204", place:"قاعة 2" },
+        { day:"الخميس",  date:"2026-4-16", course:"تحليل مركب",             code:"MA4202", place:"قاعة 2" },
+        { day:"السبت",   date:"2026-4-18", course:"ميكانيكا الموائع 2",     code:"MA4210", place:"قاعة 2" },
+        { day:"الأحد",   date:"2026-4-19", course:"هندسة تفاضلية 2",       code:"MA4212", place:"قاعة 2" },
+        { day:"الاثنين", date:"2026-4-20", course:"ديناميكا كهربية",       code:"MA4218", place:"قاعة 2" },
+      ],
+      "إحصاء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"مواضيع مختارة في علوم الحاسب",     code:"CS4222", place:"مدرج 8" },
+        { day:"الأربعاء",date:"2026-4-15", course:"معادلات تفاضلية جزئية ودوال خاصة", code:"MA4226", place:"مدرج 8" },
+        { day:"الخميس",  date:"2026-4-16", course:"إحصاء متعدد المتغيرات",           code:"ST4206", place:"مدرج 8" },
+        { day:"السبت",   date:"2026-4-18", course:"نظرية الطوابير",                  code:"ST4214", place:"مدرج 8" },
+        { day:"الأحد",   date:"2026-4-19", course:"إحصاء استخراج البيانات",         code:"ST4208", place:"مدرج 8" },
+        { day:"الاثنين", date:"2026-4-20", course:"البرامج الإحصائية",              code:"ST4210", place:"مدرج 8" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"تحليل السلاسل الزمنية",         code:"ST4204", place:"مجمع 4" },
+      ],
+      "علوم الحاسب": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"التصميم الجامع",      code:"CS4204", place:"مجمع 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"شبكات الحاسوب",       code:"CS4210", place:"مجمع 4" },
+        { day:"الخميس",  date:"2026-4-16", course:"معالجة الصور",        code:"CS4206", place:"مجمع 4" },
+        { day:"السبت",   date:"2026-4-18", course:"الشبكات العصبية",     code:"CS4214", place:"مجمع 4" },
+        { day:"الأحد",   date:"2026-4-19", course:"الأنظمة الموزعة",    code:"CS4212", place:"مجمع 4" },
+        { day:"الاثنين", date:"2026-4-20", course:"تقنية أمان الحاسوب", code:"CS4208", place:"مجمع 4" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"تحليل السلاسل الزمنية",code:"ST4204",place:"مجمع 4" },
+      ],
+      "فيزياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تقنيات تحليلية نووية",  code:"PH4264", place:"مجمع 1" },
+        { day:"الأربعاء",date:"2026-4-15", course:"فيزياء فلكية 2",         code:"PH4204", place:"مدرج 7" },
+        { day:"الخميس",  date:"2026-4-16", course:"فيزياء حيوية 2",        code:"PH4206", place:"مدرج 7" },
+        { day:"السبت",   date:"2026-4-18", course:"فيزياء المادة المكثفة", code:"PH4214", place:"مدرج 7" },
+        { day:"الأحد",   date:"2026-4-19", course:"علوم المواد 2",         code:"PH4294", place:"مدرج 7" },
+        { day:"الاثنين", date:"2026-4-20", course:"تطبيقات فيزياء الليزر",code:"PH4224", place:"مدرج 7" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء الطاقة العالية",code:"PH4234", place:"مدرج 7" },
+        { day:"الأربعاء",date:"2026-4-22", course:"فيزياء جزيئية",        code:"PH4244", place:"مدرج 7" },
+        { day:"الخميس",  date:"2026-4-23", course:"فيزياء البلازما",      code:"PH4274", place:"مدرج 7" },
+      ],
+      "كيمياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء الأصباغ",                   code:"CH4208", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء البيئة",                     code:"CH4224", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"علم البوليمرات التطبيقي",          code:"CH4222", place:"مجمع 5" },
+        { day:"السبت",   date:"2026-4-18", course:"الخواص الفيزيائية للبوليمرات",    code:"CH4212", place:"مجمع 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"كيمياء الحاسوبات",               code:"CH4214", place:"مجمع 5" },
+        { day:"الاثنين", date:"2026-4-20", course:"ميكانيكية التفاعلات غير العضوية",code:"CH4216", place:"مجمع 5" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"كيمياء تحليلية متقدمة",         code:"CH4220", place:"مجمع 5" },
+        { day:"الأربعاء",date:"2026-4-22", course:"تحليل آلي 3",                  code:"CH4206", place:"مجمع 5" },
+        { day:"الخميس",  date:"2026-4-23", course:"كيمياء الجرائم والطب الشرعي", code:"CH4226", place:"مجمع 5" },
+      ],
+      "كيمياء حيوية": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علاج الجينات",                   code:"BC4206", place:"مدرج 3" },
+        { day:"الأربعاء",date:"2026-4-15", course:"تقنية بيولوجية 2",               code:"BC4210", place:"مدرج 3" },
+        { day:"الخميس",  date:"2026-4-16", course:"الشفرات الحيوية",               code:"BC4212", place:"مدرج 3" },
+        { day:"السبت",   date:"2026-4-18", course:"التحول والخطر في التغذية",      code:"BC4216", place:"مدرج 3" },
+        { day:"الأحد",   date:"2026-4-19", course:"انتقال الإشارات",              code:"BC4218", place:"مدرج 3" },
+        { day:"الاثنين", date:"2026-4-20", course:"بيولوجيا السرطان",            code:"BC4204", place:"مجمع 1" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"كيمياء حيوية ميكروبية",      code:"BC4220", place:"مدرج 3" },
+        { day:"الأربعاء",date:"2026-4-22", course:"كيمياء حيوية بيئية",        code:"BC4222", place:"مدرج 3" },
+        { day:"الخميس",  date:"2026-4-23", course:"كيمياء الأنسجة",            code:"BC4224", place:"مدرج 3" },
+      ],
+      "جيولوجيا": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"جيولوجيا الفانيروزوي بمصر",  code:"GE4202", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"تحليل حوضي",                 code:"GE4210", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"جيولوجيا مائية",             code:"GE4212", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"معادن الخامات",              code:"GE4226", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"استشعار عن بعد",            code:"GE4216", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"جيولوجيا تصويرية",          code:"GE4204", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-22", course:"جيولوجيا البريكامبري",      code:"GE4206", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-23", course:"جيولوجيا المناجم",         code:"GE4208", place:"معامل القسم" },
+      ],
+      "جيوفيزياء": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"جيولوجيا البترول 2",             code:"GE4218", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"إستراتيجرافية مصر",             code:"GE4232", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"تكامل البيانات الجيوفيزيائية", code:"GP4204", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"ميكانيكا التربة",             code:"GP4202", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"جيوفيزياء التعدين",          code:"GP4206", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"اقتصاديات وتقييم البترول",   code:"GP4208", place:"معامل القسم" },
+      ],
+    }
+  },
+
+  // ── APPLIED PROGRAMS ─────────────────────────────────────────
+  "برنامج الكيمياء التطبيقية الصناعية": {
+    time: "متعدد الأوقات حسب المستوى",
+    sections: {
+      "المستوى الأول (10:30-11:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"حيوان عام",                    code:"ZOO102", place:"مدرج 1" },
+        { day:"الأربعاء",date:"2026-4-15", course:"ثقافة الجودة",                  code:"UN106",  place:"مدرج 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"مقدمة في الكيمياء الفيزيائية", code:"CHM102", place:"مدرج 1" },
+        { day:"السبت",   date:"2026-4-18", course:"مهارات التواصل",               code:"UN110",  place:"مدرج 1" },
+        { day:"الأحد",   date:"2026-4-19", course:"الكهرباء وأساسيات الإلكترونيات",code:"PHY102",place:"مدرج 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"تاريخ وفلسفة العلوم",         code:"UN104",  place:"مدرج 1" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"معادلات تفاضلية",             code:"MAT102", place:"مدرج 1" },
+        { day:"الأربعاء",date:"2026-4-22", course:"مبادئ الإدارة والقيادة",      code:"UN102",  place:"مدرج 1" },
+        { day:"الخميس",  date:"2026-4-23", course:"تطبيقات الحاسب الآلي",       code:"COM102", place:"مدرج 1" },
+      ],
+      "المستوى الثاني (12:00-1:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"مقدمة في علم الحشرات",        code:"ZOO202", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"مقدمة في التكنولوجيا الحيوية", code:"BOT204", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"مقدمة في علم الأحياء الدقيقة",code:"BOT202", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء العناصر الانتقالية",   code:"CHM202", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"كيمياء عضوية",              code:"CHM204", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"تحليل آلي",                code:"CHM206", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"كيمياء كهربية",            code:"CHM208", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-22", course:"إحصاء رياضي",             code:"MAT202", place:"معامل القسم" },
+      ],
+      "المستوى الثالث (1:30-2:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تحليل آلي",                              code:"CHM302", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"كيمياء المنتجات الطبيعية والمواد الخام", code:"CHM304", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"كيمياء الأسمدة والمبيدات",              code:"CHM306", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء معالجة الزيوت والدهون",         code:"CHM308", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"كيمياء تناسقية وعضوية فلزية",         code:"CHM312", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"أطياف عضوية",                         code:"CHM316", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"كيمياء صيدلانية",                    code:"CHM318", place:"معامل القسم" },
+      ],
+      "المستوى الرابع (9:00-10:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تكنولوجيا البوليمرات",                  code:"CHM418", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"المنظفات والدهانات",                     code:"CHM404", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"المعامل وإدارة الجودة",                 code:"CHM406", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"التطبيقات الصناعية للتحليل الحراري",    code:"CHM408", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"عمليات التشغيل والتحكم",               code:"CHM410", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء الطب الشرعي",                   code:"CHM412", place:"معامل القسم" },
+      ],
+    }
+  },
+
+  "برنامج التقنية الحيوية الصناعية": {
+    time: "متعدد الأوقات حسب المستوى",
+    sections: {
+      "المستوى الأول (10:30-11:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم الحيوان العام 2",       code:"ZO126",  place:"مدرج 3 و4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"ثقافة الجودة",               code:"UN106",  place:"مدرج 3 و4" },
+        { day:"الخميس",  date:"2026-4-16", course:"أغشية حيوية",               code:"BT124",  place:"مدرج 3 و4" },
+        { day:"السبت",   date:"2026-4-18", course:"اللغة العربية",             code:"UN134",  place:"مدرج 3 و4" },
+        { day:"الأحد",   date:"2026-4-19", course:"نبات 2",                    code:"BT122",  place:"مدرج 3 و4" },
+        { day:"الاثنين", date:"2026-4-20", course:"تاريخ وفلسفة العلوم",      code:"UN139",  place:"مدرج 3 و4" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"فيزياء عامة 2",            code:"PH132",  place:"مدرج 3 و4" },
+        { day:"الأربعاء",date:"2026-4-22", course:"رياضيات 2",                code:"MA130",  place:"مدرج 3 و4" },
+        { day:"الخميس",  date:"2026-4-23", course:"كيمياء عامة 2",           code:"CH128",  place:"مدرج 3 و4" },
+      ],
+      "المستوى الثاني (12:00-1:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"سموم",                                    code:"ZO228",  place:"مجمع 2" },
+        { day:"الأربعاء",date:"2026-4-15", course:"طرق البيولوجيا الجزيئية والهندسة الوراثية",code:"BT226",  place:"مجمع 2" },
+        { day:"الخميس",  date:"2026-4-16", course:"هرمونات",                                 code:"BT224",  place:"مجمع 2" },
+        { day:"السبت",   date:"2026-4-18", course:"الطحالب واستخداماتها",                    code:"BT222",  place:"مجمع 2" },
+        { day:"الأحد",   date:"2026-4-19", course:"قاعدة الأيض",                            code:"BC230",  place:"مجمع 2" },
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء الأصباغ والأنسجة",               code:"CH232",  place:"مجمع 2" },
+      ],
+      "المستوى الثالث (1:30-2:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء المناعة",                   code:"ZO326",  place:"مدرج 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"علم الأجنة الجزيئي",               code:"ZO328",  place:"مدرج 4" },
+        { day:"الخميس",  date:"2026-4-16", course:"إحصاء حيوي ومعلماتية حيوية",      code:"BT324",  place:"مدرج 4" },
+        { day:"السبت",   date:"2026-4-18", course:"الجينوم والبروتيوم",               code:"BT322",  place:"مدرج 4" },
+        { day:"الأحد",   date:"2026-4-19", course:"أيض الدواء",                      code:"BC330",  place:"مدرج 4" },
+        { day:"الاثنين", date:"2026-4-20", course:"مقدمة في البرمجة",               code:"CS332",  place:"مدرج 4" },
+      ],
+      "المستوى الرابع (9:00-10:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم الكائنات الدقيقة",                  code:"BT434",  place:"مدرج 4" },
+        { day:"الأربعاء",date:"2026-4-15", course:"المخصبات الحيوية ومبيدات الحشرات الحيوية",code:"BT432",  place:"مدرج 4" },
+        { day:"الخميس",  date:"2026-4-16", course:"تقنية حيوية طبية",                     code:"BT430",  place:"مدرج 4" },
+        { day:"السبت",   date:"2026-4-18", course:"الإدارة البيئية وتقييم الأثر البيئي",  code:"BT424",  place:"مدرج 4" },
+        { day:"الأحد",   date:"2026-4-19", course:"الأخلاق الحيوية والأمان الحيوي",      code:"BT426",  place:"مدرج 4" },
+        { day:"الاثنين", date:"2026-4-20", course:"التقنية الحيوية الصيدلانية",          code:"BT428",  place:"مدرج 4" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"الكائنات الدقيقة الغذائية والصناعية", code:"BT422",  place:"مدرج 4" },
+      ],
+    }
+  },
+
+  "برنامج جيولوجيا البترول والتعدين": {
+    time: "متعدد الأوقات حسب المستوى",
+    sections: {
+      "المستوى الأول (10:30-11:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم الكائنات الدقيقة",                  code:"BOTN1202",place:"مدرج 6" },
+        { day:"الأربعاء",date:"2026-4-15", course:"لغة إنجليزية",                           code:"UN1202",  place:"مدرج 6" },
+        { day:"الخميس",  date:"2026-4-16", course:"مقدمة في جيولوجيا التعدين",             code:"PMGE1202",place:"مدرج 6" },
+        { day:"السبت",   date:"2026-4-18", course:"مهارات التواصل",                        code:"UN110",   place:"مدرج 6" },
+        { day:"الأحد",   date:"2026-4-19", course:"أساسيات الجيوفيزياء",                  code:"PMGE1204",place:"مدرج 6" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"أساسيات الكيمياء العضوية والبلوميرات",  code:"CHEM1204",place:"مدرج 6" },
+        { day:"الخميس",  date:"2026-4-23", course:"كهربية",                               code:"PHYS1202",place:"مدرج 6" },
+      ],
+      "المستوى الثاني (12:00-1:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"علم حبوب اللقاح",                 code:"PMGE2214",place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"جيولوجيا الكواكب",                code:"PMGE2212",place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"جيولوجيا المناجم السطحية",        code:"PMGE2210",place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"اكتساب ومعالجة البيانات السيزمية",code:"PMGE2208",place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"علم الطبقات",                    code:"PMGE2206",place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"صخور نارية",                    code:"PMGE2204",place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"المعادن المكونة للصخور",        code:"PMGE2202",place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-22", course:"تحليل آلي",                    code:"CHEM2202",place:"معامل القسم" },
+      ],
+      "المستوى الثالث (1:30-2:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تكتونية الأرض",                    code:"PMGE3212",place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"جيولوجيا المياه الجوفية",          code:"PMGE3210",place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"سيزمية طبقية وتحليل أحواض",      code:"PMGE3206",place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"جيولوجيا المناجم التحت سطحية",  code:"PMGE3204",place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"جيوكيمياء تطبيقية",            code:"PMGE3202",place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"جيولوجيا البترول",             code:"PMG3208", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"كيمياء البترول",              code:"CHEM3202",place:"معامل القسم" },
+      ],
+      "المستوى الرابع (9:00-10:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"إدارة المناجم وحقول البترول والتأثيرات البيئية",code:"PMGE4206",place:"معامل القسم"},
+        { day:"الأربعاء",date:"2026-4-15", course:"إحصاء جيولوجي",                code:"MATC4202",place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"الديناميكا الأرضية وتطور الأحواض",code:"PMGE4212",place:"معامل القسم"},
+        { day:"السبت",   date:"2026-4-18", course:"طرق الحفر وإنتاج البترول",    code:"PMGE4210",place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"جيولوجيا مصر",              code:"PMGE4208",place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"تركيز خامات",               code:"PMGE4204",place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"الاستكشاف الجيوكيميائي",    code:"PMGE4202",place:"معامل القسم" },
+      ],
+    }
+  },
+
+  "برنامج الكيمياء الحيوية والميكروبيولوجيا التطبيقية": {
+    time: "متعدد الأوقات حسب المستوى",
+    sections: {
+      "المستوى الأول (10:30-11:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تنوع حيواني",         code:"Zoo102", place:"مدرج 7 و8" },
+        { day:"الأربعاء",date:"2026-4-15", course:"ثقافة الجودة",         code:"UN106",  place:"مدرج 7 و8" },
+        { day:"الخميس",  date:"2026-4-16", course:"نبات",                code:"Bot102", place:"مدرج 7 و8" },
+        { day:"السبت",   date:"2026-4-18", course:"مهارات متنقلة",       code:"Uni110", place:"مدرج 7 و8" },
+        { day:"الأحد",   date:"2026-4-19", course:"فيزياء حيوية",       code:"Phy102", place:"مدرج 7 و8" },
+        { day:"الاثنين", date:"2026-4-20", course:"تكنولوجيا المعلومات",code:"Uni102", place:"مدرج 7 و8" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"مهارات الحاسب",      code:"Com104", place:"مدرج 7 و8" },
+        { day:"الخميس",  date:"2026-4-23", course:"كيمياء عامة 2",      code:"Chm102", place:"مدرج 7 و8" },
+      ],
+      "المستوى الثاني (12:00-1:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"كيمياء فراغية والتحليل الطيفي الضوئي",code:"Chm202",place:"مجمع 1" },
+        { day:"الأربعاء",date:"2026-4-15", course:"أساسيات علم الفطريات",               code:"Mic202", place:"مجمع 1" },
+        { day:"الخميس",  date:"2026-4-16", course:"الفيروسات",                          code:"Mic204", place:"مجمع 1" },
+        { day:"السبت",   date:"2026-4-18", course:"كيمياء وأيض الكربوهيدرات والدهون", code:"BCh202", place:"مجمع 1" },
+        { day:"الأحد",   date:"2026-4-19", course:"ميكروبيولوجي الماء والتربة",       code:"Mic206", place:"مجمع 1" },
+        { day:"الاثنين", date:"2026-4-20", course:"كيمياء وأيض البروتينات والأحماض النووية",code:"BCh204",place:"مجمع 1"},
+        { day:"الثلاثاء",date:"2026-4-21", course:"علم السموم البيولوجية",           code:"Zoo204", place:"مجمع 1" },
+      ],
+      "المستوى الثالث (1:30-2:30)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"المعالجة الحيوية الميكروبية",     code:"Mic306", place:"معامل القسم" },
+        { day:"الأربعاء",date:"2026-4-15", course:"ميكروبيولوجيا طبية",              code:"Mic302", place:"معامل القسم" },
+        { day:"الخميس",  date:"2026-4-16", course:"سوائل بيولوجية ووظائف حيوية",   code:"BCh302", place:"معامل القسم" },
+        { day:"السبت",   date:"2026-4-18", course:"هندسة وراثية ومعلوماتية حيوية", code:"BCh304", place:"معامل القسم" },
+        { day:"الأحد",   date:"2026-4-19", course:"التغذية والخلل الأيضي",         code:"BCh306", place:"معامل القسم" },
+        { day:"الاثنين", date:"2026-4-20", course:"أيض الأدوية والسموم",          code:"BCh310", place:"معامل القسم" },
+        { day:"الثلاثاء",date:"2026-4-21", course:"تحليل آلي",                   code:"Chm302", place:"معامل القسم" },
+      ],
+    }
+  },
+
+  "برنامج الرياضيات ودعم اتخاذ القرار": {
+    time: "من 09:00 إلى 10:00 (المستوى الرابع)",
+    sections: {
+      "المستوى الرابع (9:00-10:00)": [
+        { day:"الثلاثاء", date:"2026-4-14", course:"تدريب ميداني",                  code:"mat400", place:"—" },
+        { day:"الأربعاء",date:"2026-4-15", course:"إحصاء استنتاجي",                code:"Sta404", place:"معمل 5" },
+        { day:"الخميس",  date:"2026-4-16", course:"التحكم الأمثل",                code:"Mat404", place:"معمل 5" },
+        { day:"السبت",   date:"2026-4-18", course:"الرياضيات التقنية للصناعة",    code:"Mat406", place:"معمل 5" },
+        { day:"الأحد",   date:"2026-4-19", course:"النماذج الخطية المعممة",      code:"Sta402", place:"معمل 5" },
+        { day:"الاثنين", date:"2026-4-20", course:"رسومات الحاسب",              code:"Com402", place:"معمل 5" },
+      ],
+    }
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD FLAT INDEX for global search
+// ═══════════════════════════════════════════════════════════════
+const flatIndex = [];
+Object.entries(scheduleData).forEach(([lvl, lvlData]) => {
+  Object.entries(lvlData.sections).forEach(([sec, rows]) => {
+    rows.forEach(r => {
+      flatIndex.push({ ...r, level: lvl, section: sec, time: lvlData.time });
+    });
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// TAB SWITCHER
+// ═══════════════════════════════════════════════════════════════
+function switchTab(tab) {
+  const isBrowse = tab === 'browse';
+  document.getElementById('tab-browse').classList.toggle('active', isBrowse);
+  document.getElementById('tab-search').classList.toggle('active', !isBrowse);
+  document.getElementById('selectorPanel').classList.toggle('hidden', !isBrowse);
+  document.getElementById('searchPanel').classList.toggle('active', !isBrowse);
+  if (isBrowse) {
+    document.getElementById('results').style.display = '';
+    document.getElementById('placeholder').style.display = '';
+  } else {
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('placeholder').style.display = 'none';
+    document.getElementById('globalSearch').focus();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SEARCH LOGIC
+// ═══════════════════════════════════════════════════════════════
+let activeFilter = 'all';
+
+function setFilter(el, filter) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  activeFilter = filter;
+  doSearch();
+}
+
+function highlight(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+}
+
+function doSearch() {
+  const raw = document.getElementById('globalSearch').value.trim();
+  const q = raw.toLowerCase();
+  const container = document.getElementById('searchResults');
+  const cards = document.getElementById('resultCards');
+  const countEl = document.getElementById('searchCount');
+
+  if (!q || q.length < 2) {
+    container.classList.remove('show');
+    return;
+  }
+
+  const hits = flatIndex.filter(r => {
+    const fields = {
+      course: (r.course || '').toLowerCase(),
+      code:   (r.code   || '').toLowerCase(),
+      date:   ((r.date || '') + ' ' + (r.day || '')).toLowerCase(),
+      place:  (r.place  || '').toLowerCase(),
+    };
+    if (activeFilter === 'all') {
+      return Object.values(fields).some(v => v.includes(q));
+    }
+    return (fields[activeFilter] || '').includes(q);
+  });
+
+  countEl.innerHTML = hits.length > 0
+    ? `تم العثور على <strong>${hits.length}</strong> نتيجة`
+    : '';
+
+  if (hits.length === 0) {
+    cards.innerHTML = `<div class="no-results"><span>🔍</span>لا توجد نتائج لـ "<strong>${raw}</strong>"</div>`;
+    container.classList.add('show');
+    return;
+  }
+
+  cards.innerHTML = hits.map((r, idx) => {
+    const isOnline = r.place === 'أونلاين';
+    const placeHTML = isOnline
+      ? `<span class="online-badge" style="font-size:.75rem">🌐 أونلاين</span>`
+      : `<span class="card-place">${highlight(r.place, raw)}</span>`;
+
+    const datePart = r.day
+      ? `<div><span class="card-day-badge ${dayClass(r.day)}">${highlight(r.day, raw)}</span></div>
+         <div class="card-date-num">${highlight(r.date, raw)}</div>`
+      : `<div class="card-date-num" style="color:rgba(255,255,255,.25)">—</div>`;
+
+    return `
+      <div class="result-card" style="animation-delay:${Math.min(idx*0.04,0.4)}s">
+        <div class="card-date">${datePart}</div>
+        <div class="card-body">
+          <div class="card-course">${highlight(r.course, raw)}</div>
+          <div class="card-meta">
+            <span class="card-code">${highlight(r.code, raw)}</span>
+            ${placeHTML}
+            <span class="card-section">📁 ${r.level} / ${r.section}</span>
+          </div>
+        </div>
+        <div class="card-right">⏰ ${r.time ? r.time.replace('من ','').replace(' إلى ','\n→ ') : '—'}</div>
+      </div>`;
+  }).join('');
+
+  container.classList.add('show');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DAY BADGE LOGIC
+// ═══════════════════════════════════════════════════════════════
+function dayClass(day) {
+  if (!day) return '';
+  const m = { 'الثلاثاء':'tue','الأربعاء':'wed','الخميس':'thu','السبت':'sat','الأحد':'sun','الاثنين':'mon' };
+  return 'day-' + (m[day] || 'tue');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// POPULATE SELECTS
+// ═══════════════════════════════════════════════════════════════
+const levelSel = document.getElementById('levelSelect');
+const sectionSel = document.getElementById('sectionSelect');
+
+Object.keys(scheduleData).forEach(lvl => {
+  const opt = document.createElement('option');
+  opt.value = lvl; opt.textContent = lvl;
+  levelSel.appendChild(opt);
+});
+
+function onLevelChange() {
+  const lvl = levelSel.value;
+  sectionSel.innerHTML = '';
+  if (!lvl) {
+    sectionSel.innerHTML = '<option value="">— اختر أولاً المستوى —</option>';
+    sectionSel.disabled = true;
+    hideResults();
+    return;
+  }
+  const defaultOpt = document.createElement('option');
+  defaultOpt.value = ''; defaultOpt.textContent = '— اختر الشعبة / البرنامج —';
+  sectionSel.appendChild(defaultOpt);
+  Object.keys(scheduleData[lvl].sections).forEach(sec => {
+    const o = document.createElement('option');
+    o.value = sec; o.textContent = sec;
+    sectionSel.appendChild(o);
+  });
+  sectionSel.disabled = false;
+  hideResults();
+}
+
+function onSectionChange() {
+  const lvl = levelSel.value;
+  const sec = sectionSel.value;
+  if (!lvl || !sec) { hideResults(); return; }
+  renderTable(lvl, sec);
+}
+
+function hideResults() {
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('placeholder').style.display = 'block';
+}
+
+function renderTable(lvl, sec) {
+  const data = scheduleData[lvl];
+  const rows = data.sections[sec];
+
+  document.getElementById('resultTitle').textContent = `${lvl} — ${sec}`;
+  document.getElementById('resultMeta').textContent = `⏰ ${data.time}`;
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+
+  rows.forEach((r, i) => {
+    const tr = document.createElement('tr');
+    const isOnline = r.place === 'أونلاين';
+
+    const placeHTML = isOnline
+      ? `<span class="online-badge">🌐 أونلاين</span>`
+      : `<span class="td-place">${r.place}</span>`;
+
+    const dateCell = r.day
+      ? `<div><span class="day-badge ${dayClass(r.day)}">${r.day}</span></div><div style="font-size:.82rem;color:rgba(255,255,255,.5)">${r.date}</div>`
+      : `<span style="color:rgba(255,255,255,.3);font-size:.8rem">—</span>`;
+
+    tr.innerHTML = `
+      <td class="row-num">${r.day ? i+1 : ''}</td>
+      <td class="td-date">${dateCell}</td>
+      <td>${r.course}</td>
+      <td class="td-code">${r.code}</td>
+      <td>${placeHTML}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('placeholder').style.display = 'none';
+  document.getElementById('results').classList.add('visible');
+}
+</script>
+</body>
+</html>
